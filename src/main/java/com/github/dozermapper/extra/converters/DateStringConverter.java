@@ -11,14 +11,16 @@ import com.github.dozermapper.core.MappingException;
 public final class DateStringConverter implements CustomConverter {
 	
 	private SimpleDateFormat sdf;
-	private DateConverter converter = new DateConverter();
+	private DateConverter converter;
 	
 	public DateStringConverter() {
 		sdf = new SimpleDateFormat();
+		converter = new DateConverter();
 	}
 
 	public DateStringConverter(String pattern) {
 		sdf = new SimpleDateFormat(pattern);
+		converter = new DateConverter(sdf);
 	}
 	
 	/**
