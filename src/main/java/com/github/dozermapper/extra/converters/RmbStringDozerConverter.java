@@ -1,10 +1,27 @@
 package com.github.dozermapper.extra.converters;
 
-import com.github.dozermapper.core.CustomConverter;
+import com.github.dozermapper.core.DozerConverter;
 import com.github.dozermapper.core.MappingException;
 
-public final class RmbStringDozerConverter implements CustomConverter {
+public final class RmbStringDozerConverter extends DozerConverter<Number, String> {
 	
+	public RmbStringDozerConverter() {
+		super(Number.class, String.class);
+	}
+
+	@Override
+	public Number convertFrom(String source, Number destination) {
+		return null;
+	}
+
+	@Override
+	public String convertTo(Number source, String destination) {
+		try {
+			return this.toRMB((Double) source);
+		} catch (Exception e) {
+			throw new MappingException( "Converter RmbStringDozerConverter used incorrectly. Arguments passed in were:" + destination + " and " + source, e);
+		}
+	}
 	
 	private String toRMB(double money) {
     	char[] s1 = {'零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖'};
@@ -40,28 +57,5 @@ public final class RmbStringDozerConverter implements CustomConverter {
     	return result;
     }
 
-	/**
-	 * 转换接口实现 
-	 * @param destinationFieldValue：目标字段值
-	 * @param sourceFieldValue：源字段值
-	 * @param destinationClass:目标字段类型
-	 * @param sourceClass：源字段类型
-	 * @return 转换后的结果
-	 */
-	public Object convert(Object destinationFieldValue, Object sourceFieldValue, Class<?> destinationClass, Class<?> sourceClass) {
-		if (sourceFieldValue == null) {
-			return null;
-		}
-		//Number to RMB String
-		if (sourceClass.equals(Number.class)&& sourceFieldValue instanceof Number) {
-			try {
-				return this.toRMB((Double) sourceFieldValue);
-			} catch (SecurityException e) {
-				throw new MappingException(e);
-			} catch (IllegalArgumentException e) {
-				throw new MappingException(e);
-			}
-		}
-		throw new MappingException( "Converter RmbStringDozerConverter used incorrectly. Arguments passed in were:" + destinationFieldValue + " and " + sourceFieldValue);
-	}
+	 
 }

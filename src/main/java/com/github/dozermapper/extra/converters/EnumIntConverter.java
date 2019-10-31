@@ -1,40 +1,22 @@
 package com.github.dozermapper.extra.converters;
 
-import com.github.dozermapper.core.CustomConverter;
-import com.github.dozermapper.core.MappingException;
+import com.github.dozermapper.core.DozerConverter;
 
-public class EnumIntConverter implements CustomConverter {
+public class EnumIntConverter extends DozerConverter<Enum, Integer>  {
 
-	/**
-	 * 转换接口实现
-	 * 
-	 * @param destinationFieldValue：目标字段值
-	 * @param sourceFieldValue：源字段值
-	 * @param destinationClass:目标字段类型
-	 * @param sourceClass：源字段类型
-	 * @return 转换后的结果
-	 */
-	public Object convert(Object destinationFieldValue, Object sourceFieldValue, Class<?> destinationClass,
-			Class<?> sourceClass) {
-		if (sourceFieldValue == null) {
-			return null;
-		}
-		// Enum to int
-		if (sourceClass.isEnum() & sourceFieldValue instanceof Enum) {
-			Object dest = null;
-			if (destinationFieldValue == null) {
-				dest = Integer.valueOf(((Enum) sourceFieldValue).ordinal());
-			} else {
-				dest = destinationFieldValue;
-			}
-			return dest;
-		}
-		// int to Enum
-		if (sourceClass.equals(Integer.class) && sourceFieldValue instanceof Integer) {
-			Object consts[] = destinationClass.getEnumConstants();
-			return consts[((Integer) sourceFieldValue).intValue()];
-		}
-		throw new MappingException("Converter EnumIntConverter used incorrectly. Arguments passed in were:"
-				+ destinationFieldValue + " and " + sourceFieldValue);
+	public EnumIntConverter() {
+		super(Enum.class, Integer.class);
 	}
+
+	@Override
+	public Enum convertFrom(Integer source, Enum destination) {
+		Enum[]  consts = destination.getClass().getEnumConstants();
+		return consts[((Integer) source).intValue()];
+	}
+
+	@Override
+	public Integer convertTo(Enum source, Integer destination) {
+		return Integer.valueOf(((Enum) source).ordinal());
+	}
+	 
 }

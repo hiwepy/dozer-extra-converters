@@ -2,33 +2,24 @@ package com.github.dozermapper.extra.converters;
 
 import org.apache.commons.beanutils.converters.BooleanConverter;
 
-import com.github.dozermapper.core.CustomConverter;
-import com.github.dozermapper.core.MappingException;
+import com.github.dozermapper.core.DozerConverter;
 
-public final class BooleanStringConverter implements CustomConverter {
+public final class BooleanStringConverter extends DozerConverter<Boolean, String>  {
 	
 	private final BooleanConverter converter = new BooleanConverter();
-     
-	/**
-	 * 转换接口实现 
-	 * @param destinationFieldValue：目标字段值
-	 * @param sourceFieldValue：源字段值
-	 * @param destinationClass:目标字段类型
-	 * @param sourceClass：源字段类型
-	 * @return 转换后的结果
-	 */
-	public Object convert(Object destinationFieldValue, Object sourceFieldValue, Class<?> destinationClass, Class<?> sourceClass) {
-		if (sourceFieldValue == null) {
-			return null;
-		}
-		//String to Boolean
-		if (sourceClass.equals(String.class)&&sourceFieldValue instanceof String) {
-			return converter.convert(String.class, sourceFieldValue);
-		}
-		//Boolean to String
-		if (sourceClass.equals(Boolean.class)&&sourceFieldValue instanceof Boolean) {
-			return Boolean.parseBoolean((String) sourceFieldValue);
-		}
-		throw new MappingException( "Converter BooleanStringConverter used incorrectly. Arguments passed in were:" + destinationFieldValue + " and " + sourceFieldValue);
+    
+	public BooleanStringConverter() {
+		super(Boolean.class, String.class);
 	}
+
+	@Override
+	public Boolean convertFrom(String source, Boolean destination) {
+		return Boolean.parseBoolean(source);
+	}
+
+	@Override
+	public String convertTo(Boolean source, String destination) {
+		return converter.convert(String.class, source);
+	}
+	 
 }
