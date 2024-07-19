@@ -1,10 +1,10 @@
 package com.github.dozermapper.extra.converters;
 
-import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson2.JSONArray;
 import com.github.dozermapper.core.DozerConverter;
 
 public final class JSONArrayStringConverter extends DozerConverter<JSONArray, String> {
-	
+
 	public JSONArrayStringConverter() {
 		super(JSONArray.class, String.class);
 	}
@@ -18,5 +18,5 @@ public final class JSONArrayStringConverter extends DozerConverter<JSONArray, St
 	public String convertTo(JSONArray source, String destination) {
 		return JSONArray.toJSONString(source);
 	}
-	 
+
 }

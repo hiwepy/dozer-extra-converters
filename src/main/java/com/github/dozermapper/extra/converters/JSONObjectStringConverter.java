@@ -1,10 +1,10 @@
 package com.github.dozermapper.extra.converters;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import com.github.dozermapper.core.DozerConverter;
 
 public final class JSONObjectStringConverter extends DozerConverter<JSONObject, String> {
-	
+
 	public JSONObjectStringConverter() {
 		super(JSONObject.class, String.class);
 	}
@@ -18,5 +18,5 @@ public final class JSONObjectStringConverter extends DozerConverter<JSONObject, 
 	public String convertTo(JSONObject source, String destination) {
 		return JSONObject.toJSONString(source);
 	}
-	 
+
 }
