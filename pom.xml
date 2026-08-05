@@ -187,7 +187,7 @@
 					<artifactId>maven-jar-plugin</artifactId>
 					<version>${maven-jar-plugin.version}</version>
 					<configuration>
-						<skipIfEmpty>true</skipIfEmpty>
+						<forceCreation>true</forceCreation>
 						<archive>
 							<manifest>
 								<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
