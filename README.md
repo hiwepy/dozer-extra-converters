@@ -2,8 +2,6 @@
 
 [English](./README.md) | [简体中文](./README.zh-CN.md)
 
-![Java](https://img.shields.io/badge/Java-17-orange) ![License](https://img.shields.io/badge/License-Apache%202.0-blue)
-
 Additional custom converters for the Dozer object mapping framework (`dozer-core` 7.x). The converters cover Boolean, fastjson2 JSON, `BigDecimal` and `BigInteger` <-> `String` conversions.
 
 ## Table of Contents
