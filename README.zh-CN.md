@@ -2,6 +2,8 @@
 
 [English](./README.md) | [简体中文](./README.zh-CN.md)
 
+[![Java](https://img.shields.io/badge/Java-17-orange)](https://github.com/easy-4-java/dozer-extra-converters) [![License](https://img.shields.io/badge/license-Apache%202.0-green)](./LICENSE)
+
 为 Dozer 对象映射框架（`dozer-core` 7.x）提供的附加自定义转换器，覆盖 Boolean、fastjson2 JSON、`BigDecimal`、`BigInteger` 与 `String` 之间的转换。
 
 ## 目录
